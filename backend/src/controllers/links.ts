@@ -52,11 +52,11 @@ export const use = async (ctx: Context) => {
 	}
 
 	const link = await Link.findOne({where: {slug: ctx.params.link.toLowerCase()}});
-	
+
 	if (!link) {
 		ctx.status = 404;
 		return;
 	}
 
-	ctx.body = await link.toJSON();
+	ctx.redirect(link.target);
 };
